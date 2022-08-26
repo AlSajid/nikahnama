@@ -1,10 +1,11 @@
 import React, { useRef, useState } from "react";
-import Bride from "./NikahInfo/Bride";
-import Groom from "./NikahInfo/Groom";
-import Location from "./NikahInfo/Location";
+import { Link, useParams } from "react-router-dom";
+import Bride from "./Bride";
+import Groom from "./Groom";
+import Location from "./Location";
 
 const Registration = () => {
-  const [level, setLevel] = useState(1);
+  let { level } = useParams();
 
   const groomRef = useRef();
   const brideRef = useRef();
@@ -15,17 +16,17 @@ const Registration = () => {
     const bride = brideRef.current.value;
     const witness = witnessRef.current.value;
 
-    const block = { groom: groom, bride: bride, witness: witness };
+    //   const block = { groom: groom, bride: bride, witness: witness };
 
-    fetch("http://localhost:5000/addBlock", {
-      method: "POST",
-      headers: new Headers({ "content-type": "application/json" }),
-      body: JSON.stringify(block),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+    //   fetch("http://localhost:5000/addBlock", {
+    //     method: "POST",
+    //     headers: new Headers({ "content-type": "application/json" }),
+    //     body: JSON.stringify(block),
+    //   })
+    //     .then((response) => response.json())
+    //     .then((data) => console.log(data));
 
-    e.preventDefault();
+    //   e.preventDefault();
   }
 
   return (
@@ -33,9 +34,9 @@ const Registration = () => {
       className="flex h-screen bg-slate-100"
       style={{ fontFamily: "Noto Serif Bengali" }}
     >
-      <div className="m-auto bg-cyan-50 shadow-lg p-10 h-1/7">
+      <div className="m-auto bg-cyan-50 shadow-lg p-10">
         <div className="border h-full py-10 px-3 bg-white">
-          <h1 className="text-3xl text-center font-semibold ">
+          <h1 className="text-3xl text-center  sj">
             ডিজিটাল নিকাহ্‌নামা
           </h1>
 
@@ -52,20 +53,20 @@ const Registration = () => {
             onSubmit={handleAddBlock}
             className="text-xl"
           >
-            {level === 1 && <Location />}
-            {level === 2 && <Groom />}
-            {level === 3 && <Bride />}
+            {level}
+            {level === "1" && <Location />}
+            {level === "2" && <Groom />}
+            {level === "3" && <Bride />}
           </form>
-          {level > 1 && (
-            <button
-              className="bg-yellow-50"
-              onClick={() => setLevel(level - 1)}
-            >
-              পূর্বর্বতী ধাপ
-            </button>
+          {level !== "1" && (
+            <Link to={"/register/" + (parseInt(level) - 1)}>
+              <button className="bg-yellow-50">পূর্বর্বতী ধাপ</button>
+            </Link>
           )}
 
-          <button onClick={() => setLevel(level + 1)}>পরবর্তী ধাপ</button>
+          <Link to={"/register/" + (parseInt(level) + 1)}>
+            <button>পরবর্তী ধাপ</button>
+          </Link>
 
           <button>Add Block</button>
         </div>
