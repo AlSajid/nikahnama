@@ -1,20 +1,37 @@
 import JsonQuery from "json-query";
 import React, { useEffect, useState } from "react";
 
-const Location = () => {
-  const [division, setDivision] = useState();
+const Location = ({ type, setLocation }) => {
+  const [division, setDivision] = useState(
+    localStorage.getItem(`${type}-division`)
+  );
   const [divisions, setDivisions] = useState();
 
-  const [district, setDistrict] = useState();
+  const [district, setDistrict] = useState(
+    localStorage.getItem(`${type}-district`)
+  );
   const [districts, setDistricts] = useState();
 
-  const [upazila, setUpazila] = useState();
+  const [upazila, setUpazila] = useState(
+    localStorage.getItem(`${type}-upazila`)
+  );
   const [upazilas, setUpazilas] = useState();
 
-  const [union, setUnion] = useState();
+  const [union, setUnion] = useState(localStorage.getItem(`${type}-union`));
   const [unions, setUnions] = useState();
 
-  const [ward, setWard] = useState();
+  const [ward, setWard] = useState(localStorage.getItem(`${type}-ward`));
+
+  useEffect(() => {
+    if (districts && divisions && unions && upazilas && ward) {
+      localStorage.setItem(
+        `${type}-location`,
+        `${JsonQuery(`[*id=${union}][bn_name]`, { data: unions }).value[0]}, ${JsonQuery(`[*id=${upazila}][bn_name]`, { data: upazilas }).value[0]}, ${JsonQuery(`[*id=${district}][bn_name]`, { data: districts })
+          .value[0]}, ${JsonQuery(`[*id=${division}][bn_name]`, { data: divisions })
+            .value[0]} বিভাগ`
+      );
+    }
+  }, [district, division, union, upazila, ward]);
 
   useEffect(() => {
     fetch(
@@ -49,7 +66,6 @@ const Location = () => {
   }, [district]);
 
   useEffect(() => {
-    console.log(upazila);
     fetch(
       "https://raw.githubusercontent.com/nuhil/bangladesh-geocode/master/unions/unions.json"
     )
@@ -62,21 +78,20 @@ const Location = () => {
   }, [upazila]);
 
   return (
-    <div className="p-3 m-3 ">
-      <label className="text-center font-semibold text-3xl my-3">
-        যেখানে বিবাহ কার্য নিষ্পন্ন হয়েছে
-      </label>
-      <div className="flex flex-row">
-        <div className="w-1/5 border p-3 mx-1">
+    <div className="my-5 ">
+      <div className="flex h-12 justify-around">
+        <div className="border w-full mx-3">
           <select
             id="select_page"
-            className="w-full "
-            onChange={(e) => setDivision(e.target.value)}
+            className="w-full h-full text-center"
+            value={division}
+            onChange={(e) => {
+              setDivision(e.target.value);
+              localStorage.setItem(`${type}-division`, e.target.value);
+            }}
           >
             {}
-            <option value="" className="bg-red-200">
-              বিভাগ
-            </option>
+            <option>বিভাগ</option>
 
             {divisions?.map((division) => (
               <option key={division.id} value={division.id}>
@@ -86,11 +101,15 @@ const Location = () => {
           </select>
         </div>
 
-        <div className="w-1/5 border p-3 mx-1">
+        <div className=" border w-full mx-3">
           <select
             id="select_page"
-            className="w-full "
-            onChange={(e) => setDistrict(e.target.value)}
+            className="w-full h-full text-center"
+            value={district}
+            onChange={(e) => {
+              setDistrict(e.target.value);
+              localStorage.setItem(`${type}-district`, e.target.value);
+            }}
           >
             <option value="">জেলা</option>
             {districts?.map((district) => (
@@ -101,36 +120,57 @@ const Location = () => {
           </select>
         </div>
 
-        <div className="w-1/5 border p-3 mx-1">
+        <div className=" border w-full mx-3">
           <select
             id="select_page"
-            className="w-full "
-            onChange={(e) => setUpazila(e.target.value)}
+            className="w-full h-full text-center"
+            value={upazila}
+            onChange={(e) => {
+              setUpazila(e.target.value);
+              localStorage.setItem(`${type}-upazila`, e.target.value);
+            }}
           >
             <option value="">উপজেলা</option>
             {upazilas?.map((upazila) => (
-              <option key={upazila.id} value={upazila.id}>{upazila.bn_name}</option>
+              <option key={upazila.id} value={upazila.id}>
+                {upazila.bn_name}
+              </option>
             ))}
           </select>
         </div>
 
-        <div className="w-1/5 border p-3 mx-1">
+        <div className=" border w-full mx-3">
           <select
             id="select_page"
-            className="w-full "
-            onChange={(e) => setUnion(e.target.value)}
+            className="w-full h-full text-center"
+            value={union}
+            onChange={(e) => {
+              setUnion(e.target.value);
+              localStorage.setItem(`${type}-union`, e.target.value);
+            }}
           >
             <option value="">ইউনিয়ন</option>
             {unions?.map((union) => (
-              <option key={union.id} value={union.id}>{union.bn_name}</option>
+              <option key={union.id} value={union.id}>
+                {union.bn_name}
+              </option>
             ))}
           </select>
         </div>
 
-        <div className="w-1/5 border p-3 mx-1">
-          <input type={"text"} onChange={(e) => setWard(e.target.value)} width="w-1/2"placeholder="ওয়ার্ড"/>
+        <div className="border w-full mx-3">
+          <input
+            type="number"
+            value={ward}
+            onChange={(e) => {
+              setWard(e.target.value);
+              localStorage.setItem(`${type}-ward`, e.target.value);
+            }}
+            className="h-full text-center text-xl sjn w-full"
+            min="0"
+            placeholder="IqvW©"
+          />
         </div>
-
       </div>
     </div>
   );

@@ -11,7 +11,6 @@ function App() {
         <Route path="/" element={<NikahNama />} />
         <Route path="/register" element={<Navigate to="1" replace={true} />} />
         <Route path="/register/:level" element={<Registration />} />
-        {/* <Route path="/register/1" element={<Registration />} /> */}
         <Route path="/filter" element={<Filter />} />
       </Routes>
     </div>

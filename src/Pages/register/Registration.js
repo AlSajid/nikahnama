@@ -1,75 +1,110 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Bride from "./Bride";
-import Groom from "./Groom";
+import Conditions from "./Conditions";
+import Final from "./Final";
+import Info from "./Info";
 import Location from "./Location";
+import Mahr from "./Mahr";
+import Participants from "./Participants";
+import Power from "./Power";
+// import Gun from "gun";
+import Loader from "./Loader";
 
 const Registration = () => {
   let { level } = useParams();
+  const [loader, setLoader] = useState("");
+  const [block, setBlock] = useState();
 
-  const groomRef = useRef();
-  const brideRef = useRef();
-  const witnessRef = useRef();
+  // const gun = Gun({
+  //   peers: ["http://localhost:5000/gun"],
+  // });
+  // const blockchain = gun.get("nikahnama");
 
-  function handleAddBlock(e) {
-    const groom = groomRef.current.value;
-    const bride = brideRef.current.value;
-    const witness = witnessRef.current.value;
-
-    //   const block = { groom: groom, bride: bride, witness: witness };
-
-    //   fetch("http://localhost:5000/addBlock", {
-    //     method: "POST",
-    //     headers: new Headers({ "content-type": "application/json" }),
-    //     body: JSON.stringify(block),
-    //   })
-    //     .then((response) => response.json())
-    //     .then((data) => console.log(data));
-
-    //   e.preventDefault();
+  function handleAddBlock() {
+    // gun.get("tutorial").unset(null);
+    // setLoader("ব্লকটি মাইন করা হচ্ছে");
+    fetch("http://localhost:5000/addBlock", {
+      method: "POST",
+      headers: new Headers({ "content-type": "application/json" }),
+      body: JSON.stringify(block),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // setLoader("অভিনন্দন! সফলভাবে বিবাহ নিবন্ধিত হয়েছে");
+      });
+    // gun.get("tutorial").on((data) => {
+    //   console.log("data changed: ", data);
+    // });
   }
 
   return (
-    <div
-      className="flex h-screen bg-slate-100"
-      style={{ fontFamily: "Noto Serif Bengali" }}
-    >
-      <div className="m-auto bg-cyan-50 shadow-lg p-10">
-        <div className="border h-full py-10 px-3 bg-white">
-          <h1 className="text-3xl text-center  sj">
-            ডিজিটাল নিকাহ্‌নামা
-          </h1>
+    <div className="flex h-screen bg-slate-100">
+      <div className="m-auto bg-white shadow-lg p-10 w-3/4 h-5/6">
+        {loader === "" ? (
+          <div className="border-dotted border-4 border-red-500 h-full py-5 px-5 relative">
+            <h1 className="text-3xl text-center sj my-3 text-red-600">
+              ডিজিটাল নিকাহ্‌নামা
+            </h1>
 
-          <p className="my-3 text-xs text-right">
-            [বিধি ২৭ (১) (ক) দ্রষ্টব্য]
-            <br />
-            মুসলিম বিবাহ ও তালাক (নিবন্ধন) বিধিমালা, ২০০৯ এর বিধি ২৮ (১) (ক)
-            অনুযায়ী বিবাহ ফরম
-          </p>
-          <hr />
+            <p className="my-3 text-xs text-right">
+              [বিধি ২৭ (১) (ক) দ্রষ্টব্য]
+              <br />
+              মুসলিম বিবাহ ও তালাক (নিবন্ধন) বিধিমালা, ২০০৯ এর বিধি ২৮ (১) (ক)
+              অনুযায়ী বিবাহ ফরম
+            </p>
+            <hr className="my-5" />
 
-          <form
+            {/* <form
             autoComplete="off"
             onSubmit={handleAddBlock}
             className="text-xl"
-          >
-            {level}
-            {level === "1" && <Location />}
-            {level === "2" && <Groom />}
-            {level === "3" && <Bride />}
-          </form>
-          {level !== "1" && (
-            <Link to={"/register/" + (parseInt(level) - 1)}>
-              <button className="bg-yellow-50">পূর্বর্বতী ধাপ</button>
-            </Link>
-          )}
+          > */}
+            {level === "1" && (
+              <div className="text-center">
+                <label className=" text-xl my-3">
+                  যেখানে বিবাহকার্য নিষ্পন্ন হয়েছে
+                </label>
+                <Location type="wed" />
+              </div>
+            )}
+            {level === "2" && <Participants type="groom" />}
+            {level === "3" && <Participants type="bride" />}
+            {level === "4" && <Mahr />}
+            {level === "5" && <Power />}
+            {level === "6" && <Conditions />}
+            {level === "7" && <Participants type="witness1" />}
+            {level === "8" && <Participants type="witness2" />}
+            {level === "9" && <Participants type="kazi" />}
+            {level === "10" && <Info />}
+            {level === "11" && <Final addBlock={setBlock} />}
 
-          <Link to={"/register/" + (parseInt(level) + 1)}>
-            <button>পরবর্তী ধাপ</button>
-          </Link>
+            {/* </form> */}
 
-          <button>Add Block</button>
-        </div>
+            {level !== "1" && (
+              <Link to={"/register/" + (parseInt(level) - 1)}>
+                <button className="rounded absolute bottom-0 left-0 bg-slate-50 border-b-2 border-dashed border-slate-300 m-3 py-3 w-32">
+                  পূর্ববর্তী ধাপ
+                </button>
+              </Link>
+            )}
+            {level === "11" ? (
+              <button
+                onClick={() => handleAddBlock()}
+                className="absolute bottom-0 right-0 border-2 rounded bg-slate-50 border-dashed m-3 py-3 w-32 "
+              >
+                নিবন্ধন করুন
+              </button>
+            ) : (
+              <Link to={"/register/" + (parseInt(level) + 1)}>
+                <button className="absolute bottom-0 right-0 border-b-2 bg-slate-50 rounded border-dashed border-slate-300 m-3 py-3 w-32 ">
+                  পরবর্তী ধাপ
+                </button>
+              </Link>
+            )}
+          </div>
+        ) : (
+          <Loader text={loader} />
+        )}
       </div>
     </div>
   );
