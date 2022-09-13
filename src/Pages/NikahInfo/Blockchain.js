@@ -3,26 +3,33 @@ import Gun from "gun";
 
 const Blockchain = () => {
   const gun = Gun({
-    peers: ["http://192.168.31.219:5000/gun"],
-    peers: ["http://192.168.31.109:5000/gun"],
+    peers: [
+      "http://192.168.31.219:5000/gun",
+      // "http://192.168.31.109:5000/gun"
+    ],
   });
 
-  const [blockchain, setBlockchain] = useState([]);
+  const [blockchain, setBlockchain] = useState("");
+  useEffect(() => {
+    gun.get("blockchain").on((data) => {
+      setBlockchain(data?.nikahNama);
 
-  gun.get("blockchain").once((data) => setBlockchain([data?.nikahNama]));
+    });
+  }, [gun]);
 
-  const load = () => {
-    gun.get("blockchain").put({ nikahNama: "hello" });
+  const load = (value) => {
+    gun.get("blockchain").put({ nikahNama: value });
   };
 
   return (
     <div>
       <h1>নিকাহ্‌নামা সমূহ</h1>
-      <button onClick={() => load()}>Load</button>
-
-      {blockchain.map((block) => (
-        <p>{block}</p>
-      ))}
+      {/* <button className="border bg-red-400" onClick={() => load()}>Load</button> */}
+      <input type={"text"} onChange={(e) => load(e.target.value)} />
+      {blockchain}
+      {/* {blockchain.map((block) => (
+        <p >{block}</p>
+      ))} */}
     </div>
   );
 };
