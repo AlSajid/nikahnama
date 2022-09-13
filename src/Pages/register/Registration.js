@@ -9,6 +9,7 @@ import Participants from "./Participants";
 import Power from "./Power";
 // import Gun from "gun";
 import Loader from "./Loader";
+import mineBlocks from "../../hooks/useMine";
 
 const Registration = () => {
   let { level } = useParams();
@@ -21,17 +22,18 @@ const Registration = () => {
   // const blockchain = gun.get("nikahnama");
 
   function handleAddBlock() {
-    // gun.get("tutorial").unset(null);
-    // setLoader("ব্লকটি মাইন করা হচ্ছে");
-    fetch("http://localhost:5000/addBlock", {
-      method: "POST",
-      headers: new Headers({ "content-type": "application/json" }),
-      body: JSON.stringify(block),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // setLoader("অভিনন্দন! সফলভাবে বিবাহ নিবন্ধিত হয়েছে");
-      });
+    }
+    console.log("Block mined: " + mineBlocks(block, 3));
+    // fetch("http://localhost:5000/addBlock", {
+    //   method: "POST",
+    //   headers: new Headers({ "content-type": "application/json" }),
+    //   body: JSON.stringify(block),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     // setLoader("অভিনন্দন! সফলভাবে বিবাহ নিবন্ধিত হয়েছে");
+    //     console.log(data);
+    //   });
     // gun.get("tutorial").on((data) => {
     //   console.log("data changed: ", data);
     // });
