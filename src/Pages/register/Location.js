@@ -31,7 +31,7 @@ const Location = ({ type, setLocation }) => {
             .value[0]} বিভাগ`
       );
     }
-  }, [district, division, union, upazila, ward]);
+  }, [district, districts, division, divisions, type, union, unions, upazila, upazilas, ward]);
 
   useEffect(() => {
     fetch(

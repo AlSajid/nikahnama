@@ -1,6 +1,5 @@
 import { toBengaliWords } from "number-to-bengli-words";
 import React, { useState } from "react";
-import Power from "./Power";
 
 const Mahr = () => {
   const [mahr, setMahr] = useState(localStorage.getItem("mahr"));
