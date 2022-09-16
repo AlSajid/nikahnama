@@ -7,7 +7,9 @@ const Participants = ({ type }) => {
   const [birthDate, setBirthDate] = useState(
     localStorage.getItem(`${type}-birthDate`)
   );
-  const [information, setInformation] = useState(JSON.parse(localStorage.getItem(`${type}-information`)));
+  const [information, setInformation] = useState(
+    JSON.parse(localStorage.getItem(`${type}-information`))
+  );
   const [loader, setLoader] = useState("");
 
   useEffect(() => {
@@ -110,7 +112,7 @@ const Participants = ({ type }) => {
             value={birthDate}
             onChange={(e) => {
               setBirthDate(e.target.value);
-              localStorage.setItem(`${type}-birthDate`, e.target.value)
+              localStorage.setItem(`${type}-birthDate`, e.target.value);
             }}
             className="text-xl w-full p-3 text-right focus:outline-0 appearance-none h-10 border-b-2 border-dashed"
           ></input>
