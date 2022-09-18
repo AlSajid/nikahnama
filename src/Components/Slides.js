@@ -17,7 +17,7 @@ const Slides = () => {
 
   setTimeout(() => {
     setCurrent(++current);
-  }, 5000);
+  }, 7000);
 
   const images = [a, c, d];
   const slogan = [
