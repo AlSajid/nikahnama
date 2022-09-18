@@ -27,15 +27,15 @@ const Slides = () => {
   ];
 
   return (
-    <section className="">
-      <div className="relative mx-auto lg:w-3/4 sm:w-full rounded my-5 bg-slate-100 ">
-        <div className="fade overflow-hidden h-96">
+    <section className="container mx-auto">
+      <div className="relative mx-auto my-3 bg-slate-100 ">
+        <div className="fade overflow-hidden md:h-96">
           <img
-            className=" rounded-md w-full"
+            className="w-full"
             src={images[current]}
             alt="cover"
           />
-          <div className="text-white absolute bottom-2 lg:text-5xl md:text-5xl text-3xl text-center lg:w-full md:w-full md:left-0 lg:left-0 h-full flex items-center justify-center w-11/12 mx-auto left-3">
+          <div className="text-white absolute bottom-2 md:text-5xl text-3xl text-center md:w-full  md:left-0 h-full flex items-center justify-center w-11/12 mx-auto left-3">
             <h1>{slogan[current]}</h1>
           </div>
         </div>

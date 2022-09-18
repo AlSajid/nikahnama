@@ -10,25 +10,18 @@ const Blockchain = () => {
   const [blockchain, setBlockchain] = useState("");
   useEffect(() => {
     gun.get("blockchain").on((data) => {
-      setBlockchain(data?.nikahNama);
-      console.log(data);
+      setBlockchain(JSON.parse(data?.nikahNama));
     });
-  }, [gun]);
+  }, []);
 
-  const load = (value) => {
-    gun.get("blockchain").put({ nikahNama: value });
-  };
-  
+  console.log(blockchain);
 
   return (
     <div>
       <Header />
-      <button className="border bg-red-400" onClick={() => load()}>
-        Load
-      </button>
-      <input type={"text"} onChange={(e) => load(e.target.value)} />
+
       {blockchain.map((block) => (
-        <p>{block}</p>
+        <p>{block.hash}</p>
       ))}
     </div>
   );
