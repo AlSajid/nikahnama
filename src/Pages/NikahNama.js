@@ -13,7 +13,7 @@ const NikahNama = () => {
       <Slides />
       <div className="flex flex-col md:flex-row border mx-auto py-5 bg-slate-50 bg-bottom rounded-xl container">
         <div className="md:w-1/3 w-full flex items-center justify-center ">
-          <h1 className="text-3xl m-5">এখন বিবাহ নিবন্ধন আরও সহজ...</h1>
+          <h1 className="text-3xl m-5">এখন বিবাহ নিবন্ধন খুবই সহজ...</h1>
         </div>
         <div className="flex flex-wrap md:w-2/3 justify-evenly">
           <Link to="/register" className="m-3">

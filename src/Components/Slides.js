@@ -30,11 +30,7 @@ const Slides = () => {
     <section className="container mx-auto">
       <div className="relative mx-auto my-3 bg-slate-100 ">
         <div className="fade overflow-hidden md:h-96">
-          <img
-            className="w-full"
-            src={images[current]}
-            alt="cover"
-          />
+          <img className="w-full" src={images[current]} alt="cover" />
           <div className="text-white absolute bottom-2 md:text-5xl text-3xl text-center md:w-full  md:left-0 h-full flex items-center justify-center w-11/12 mx-auto left-3">
             <h1>{slogan[current]}</h1>
           </div>

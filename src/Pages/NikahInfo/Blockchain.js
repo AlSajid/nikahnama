@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Gun from "gun";
 import Header from "./Header";
+import Block from "./Block";
 
 const Blockchain = () => {
   const gun = Gun({
     peers: ["http://192.168.31.219:5000/gun", "http://192.168.31.109:5000/gun"],
   });
 
-  const [blockchain, setBlockchain] = useState("");
+  const [blockchain, setBlockchain] = useState([]);
   useEffect(() => {
     gun.get("blockchain").on((data) => {
       setBlockchain(JSON.parse(data?.nikahNama));
@@ -17,12 +18,13 @@ const Blockchain = () => {
   console.log(blockchain);
 
   return (
-    <div>
+    <div className="">
       <Header />
-
-      {blockchain.map((block) => (
-        <p>{block.hash}</p>
-      ))}
+      <div>
+        {blockchain?.map((block) => (
+          <Block key={block.hash} data={block.data}/>
+        ))}
+      </div>
     </div>
   );
 };
