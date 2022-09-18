@@ -26,12 +26,27 @@ const Location = ({ type, setLocation }) => {
     if (districts && divisions && unions && upazilas && ward) {
       localStorage.setItem(
         `${type}-location`,
-        `${JsonQuery(`[*id=${union}][bn_name]`, { data: unions }).value[0]}, ${JsonQuery(`[*id=${upazila}][bn_name]`, { data: upazilas }).value[0]}, ${JsonQuery(`[*id=${district}][bn_name]`, { data: districts })
-          .value[0]}, ${JsonQuery(`[*id=${division}][bn_name]`, { data: divisions })
-            .value[0]} বিভাগ`
+        `${JsonQuery(`[*id=${union}][bn_name]`, { data: unions }).value[0]}, ${
+          JsonQuery(`[*id=${upazila}][bn_name]`, { data: upazilas }).value[0]
+        }, ${
+          JsonQuery(`[*id=${district}][bn_name]`, { data: districts }).value[0]
+        }, ${
+          JsonQuery(`[*id=${division}][bn_name]`, { data: divisions }).value[0]
+        } বিভাগ`
       );
     }
-  }, [district, districts, division, divisions, type, union, unions, upazila, upazilas, ward]);
+  }, [
+    district,
+    districts,
+    division,
+    divisions,
+    type,
+    union,
+    unions,
+    upazila,
+    upazilas,
+    ward,
+  ]);
 
   useEffect(() => {
     fetch(
@@ -83,7 +98,7 @@ const Location = ({ type, setLocation }) => {
         <div className="border w-full mx-3">
           <select
             id="select_page"
-            className="w-full h-full text-center"
+            className="w-full h-full text-center focus:outline-0 appearance-none"
             value={division}
             onChange={(e) => {
               setDivision(e.target.value);
@@ -104,7 +119,7 @@ const Location = ({ type, setLocation }) => {
         <div className=" border w-full mx-3">
           <select
             id="select_page"
-            className="w-full h-full text-center"
+            className="w-full h-full text-center focus:outline-0 appearance-none"
             value={district}
             onChange={(e) => {
               setDistrict(e.target.value);
@@ -123,7 +138,7 @@ const Location = ({ type, setLocation }) => {
         <div className=" border w-full mx-3">
           <select
             id="select_page"
-            className="w-full h-full text-center"
+            className="w-full h-full text-center focus:outline-0 appearance-none"
             value={upazila}
             onChange={(e) => {
               setUpazila(e.target.value);
@@ -142,7 +157,7 @@ const Location = ({ type, setLocation }) => {
         <div className=" border w-full mx-3">
           <select
             id="select_page"
-            className="w-full h-full text-center"
+            className="w-full h-full text-center focus:outline-0 appearance-none"
             value={union}
             onChange={(e) => {
               setUnion(e.target.value);
@@ -166,7 +181,7 @@ const Location = ({ type, setLocation }) => {
               setWard(e.target.value);
               localStorage.setItem(`${type}-ward`, e.target.value);
             }}
-            className="h-full text-center text-xl sjn w-full"
+            className="h-full text-center text-xl sjn w-full focus:outline-0 appearance-none"
             min="0"
             placeholder="IqvW©"
           />
