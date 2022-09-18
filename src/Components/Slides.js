@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./slides.css";
 import a from "./../images/a.jpg";
-import c from "./../images/c.jpg";
-import d from "./../images/d.jpg";
+import c from "./../images/b.jpg";
+import d from "./../images/c.jpg";
 
 const Slides = () => {
   let [current, setCurrent] = useState(0);
@@ -21,8 +21,8 @@ const Slides = () => {
 
   const images = [a, c, d];
   const slogan = [
-    "যৌতুক এক সামাজিক ব্যাধি",
     "বাল্যবিবাহ একটি দন্ডনীয় অপরাধ",
+    "যৌতুক এক সামাজিক ব্যাধি",
     "যথাসময়ে বিবাহ নিবন্ধন বাধ্যতামূলক",
   ];
 
