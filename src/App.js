@@ -12,7 +12,7 @@ function App() {
         <Route path="/register" element={<Navigate to="1" replace={true} />} />
         <Route path="/register/:level" element={<Registration />} />
         <Route path="/blockchain" element={<Blockchain />} />
-        <Route path="search" element={<Search />} />
+        <Route path="/search" element={<Search />} />
       </Routes>
     </div>
   );

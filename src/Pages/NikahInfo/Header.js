@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div>
       <Link to="/">
-        <header className="text-center text-3xl py-5 border shadow ">
+        <header className="text-center text-3xl py-5 border shadow">
           <h1 className="">নিকাহ্‌নামা</h1>
         </header>
       </Link>

@@ -23,6 +23,7 @@ const Registration = () => {
 
   function handleAddBlock() {
     // console.log("Block mined: " + mineBlocks(block, 3));
+    console.log(block);
     fetch("http://localhost:5000/addBlock", {
       method: "POST",
       headers: new Headers({ "content-type": "application/json" }),
@@ -65,7 +66,12 @@ const Registration = () => {
                 <label className=" text-xl my-3">
                   যেখানে বিবাহকার্য নিষ্পন্ন হয়েছে
                 </label>
-                <Location type="wed" />
+                <div className="my-10">
+                  <Location type="wed" />
+                </div>
+                <div className="my-10">
+                  <Info />
+                </div>
               </div>
             )}
             {level === "2" && <Participants type="groom" />}
@@ -76,10 +82,7 @@ const Registration = () => {
             {level === "7" && <Participants type="witness1" />}
             {level === "8" && <Participants type="witness2" />}
             {level === "9" && <Participants type="kazi" />}
-            {level === "10" && <Info />}
-            {level === "11" && <Final addBlock={setBlock} />}
-
-            {/* </form> */}
+            {level === "10" && <Final addBlock={setBlock} />}
 
             {level !== "1" && (
               <Link to={"/register/" + (parseInt(level) - 1)}>
@@ -88,7 +91,7 @@ const Registration = () => {
                 </button>
               </Link>
             )}
-            {level === "11" ? (
+            {level === "10" ? (
               <button
                 onClick={() => handleAddBlock()}
                 className="absolute bottom-0 right-0 border-2 rounded bg-slate-50 border-dashed m-3 py-3 w-32 "
