@@ -43,7 +43,7 @@ const Registration = () => {
     <div className="flex h-screen bg-slate-100">
       <div className="m-auto bg-white shadow-lg p-10 container h-5/6 ">
         <div className="border-dotted border-4 border-black h-full py-5 px-5 relative md:hidden">
-          <h2 className="text-lg text-center">দুঃখিত</h2>
+          <h2 className="text-xl text-center">দুঃখিত</h2>
           <p className="leading-7 text-justify">      
             <br /> নিবন্ধিত তথ্য সংশোধনযোগ্য নয়। অত্যন্ত সতর্কতার সাথে তথ্য পূরণ
             আবশ্যক। এজন্য মুঠোফোন থেকে নিবন্ধন কার্যক্রম পরিচালনা গ্রহণযোগ্য নয়।
