@@ -8,12 +8,8 @@ const Mahr = () => {
     localStorage.getItem("mustPaidMahr")
   );
   const [paidMahr, setPaidMahr] = useState(localStorage.getItem("paidMahr"));
-
   const [numberInWords, setNumberInWords] = useState("");
 
-  useEffect(() => {
-    console.log(mahr);
-  }, [mahr]);
 
   return (
     <div>
