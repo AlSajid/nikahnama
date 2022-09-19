@@ -183,7 +183,7 @@ const Location = ({ type, setLocation }) => {
             }}
             className="h-full text-center text-xl sjn w-full focus:outline-0 appearance-none"
             min="0"
-            placeholder="IqvW©"
+            placeholder="IqvW©" // ওয়ার্ড
           />
         </div>
       </div>

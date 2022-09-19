@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Info = () => {
   const getToday = () => {
@@ -10,24 +10,29 @@ const Info = () => {
     return yyyy + "-" + mm + "-" + dd;
   };
 
+  const [fixDate, setFixDate] = useState(localStorage.getItem("fixDate"));
+
   return (
     <div className="flex">
       <div className="w-full mx-3 p-3">
         <label className="block">বিবাহ নির্ধারণের তারিখ</label>
         <input
           type="date"
-          value={localStorage.getItem("datefix")}
-          onChange={(e) => localStorage.setItem("datefix", e.target.value)}
-          className="text-xl w-full p-3 border-b-2 border-dashed text-right focus:outline-0 appearance-none h-10"
+          defaultValue={getToday()}
+          value={fixDate}
+          onChange={(e) => {
+            setFixDate(e.target.value);
+            localStorage.setItem("fixDate", e.target.value);
+          }}
+          className="text-xl w-full sjn p-3 border-b-2 border-dashed text-right focus:outline-0 appearance-none h-10"
         ></input>
       </div>
       <div className="w-full mx-3 p-3">
-        <label className="block">নিকাহ্‌নামা প্রস্তুতের তারিখ</label>
+        <label className="block">বিবাহ নিবদ্ধনের তারিখ</label>
         <input
           type="date"
-          value={localStorage.getItem("nn-date")}
-          onChange={(e) => localStorage.setItem("nn-date", e.target.value)}
-          className="text-xl w-full p-3 border-b-2 border-dashed text-right focus:outline-0 appearance-none h-10"
+          value={getToday()}
+          className="text-xl sjn w-full p-3 border-b-2 border-dashed text-right focus:outline-0 appearance-none h-10"
         ></input>
       </div>
     </div>

@@ -109,12 +109,13 @@ const Participants = ({ type }) => {
           <label>{text} জন্মতারিখ</label>
           <input
             type="date"
+            defaultValue={"2000-01-01"}
             value={birthDate}
             onChange={(e) => {
               setBirthDate(e.target.value);
               localStorage.setItem(`${type}-birthDate`, e.target.value);
             }}
-            className="text-xl w-full p-3 text-right focus:outline-0 appearance-none h-10 border-b-2 border-dashed"
+            className="text-xl w-full sjn p-3 text-right focus:outline-0 appearance-none h-10 border-b-2 border-dashed"
           ></input>
         </div>
 

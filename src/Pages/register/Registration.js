@@ -44,16 +44,18 @@ const Registration = () => {
       <div className="m-auto bg-white shadow-lg p-10 container h-5/6 ">
         <div className="border-dotted border-4 border-black h-full py-5 px-5 relative md:hidden">
           <h2 className="text-xl text-center">দুঃখিত</h2>
-          <p className="leading-7 text-justify">      
+          <p className="leading-7 text-justify">
             <br /> নিবন্ধিত তথ্য সংশোধনযোগ্য নয়। অত্যন্ত সতর্কতার সাথে তথ্য পূরণ
             আবশ্যক। এজন্য মুঠোফোন থেকে নিবন্ধন কার্যক্রম পরিচালনা গ্রহণযোগ্য নয়।
           </p>
         </div>
         {loader === "" ? (
           <div className="border-dotted border-4 border-red-500 h-full py-5 px-5 relative hidden md:block">
-            <h1 className="text-3xl text-center sj my-3 text-red-600">
-              ডিজিটাল নিকাহ্‌নামা
-            </h1>
+            <Link to="/">
+              <h1 className="text-3xl text-center sj my-3 text-red-600">
+                ডিজিটাল নিকাহ্‌নামা
+              </h1>
+            </Link>
 
             <p className="my-3 text-xs text-right">
               [বিধি ২৭ (১) (ক) দ্রষ্টব্য]
@@ -88,6 +90,7 @@ const Registration = () => {
             {level === "6" && <Conditions />}
             {level === "7" && <Participants type="witness1" />}
             {level === "8" && <Participants type="witness2" />}
+            {level === "9" && <Participants type="kazi" />}
             {level === "9" && <Participants type="kazi" />}
             {level === "10" && <Final addBlock={setBlock} />}
 

@@ -8,7 +8,7 @@ import Slides from "../Components/Slides";
 
 const NikahNama = () => {
   return (
-    <div className=" mx-auto">
+    <div className="">
       <Header />
       <Slides />
       <div className="flex flex-col md:flex-row border mx-auto py-5 bg-slate-50 bg-bottom rounded-xl container">

@@ -5,7 +5,7 @@ import Block from "./Block";
 
 const Blockchain = () => {
   const gun = Gun({
-    peers: ["http://192.168.31.219:5000/gun", "http://192.168.31.109:5000/gun"],
+    peers: ["https://odd-stockings-newt.cyclic.app/gun"],
   });
 
   const [blockchain, setBlockchain] = useState([]);
