@@ -18,6 +18,7 @@ const useFees = (mahr) => {
     const feesForMoreThan4Lac = feeForMoreThan4Lac(mahr - 400000);
     const feesFor4Lac = feeFor4Lac(400000);
     totalFee = feesFor4Lac + feesForMoreThan4Lac;
+
     return totalFee;
   } else {
     totalFee = feeFor4Lac(mahr);

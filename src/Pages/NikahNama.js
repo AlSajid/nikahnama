@@ -17,7 +17,7 @@ const NikahNama = () => {
         </div>
         <div className="flex flex-wrap md:w-2/3 justify-evenly">
           <Link to="/register" className="m-3">
-            <div className="border w-48 p-3 rounded hover:shadow-sm transition duration-300 ease-in-out hover:shadow-red-500 bg-white">
+            <div className="border hidden md:block w-48 p-3 rounded hover:shadow-sm transition duration-300 ease-in-out hover:shadow-red-500 bg-white">
               <div className="p-5">
                 <BiBookAdd className="text-5xl mx-auto" />
               </div>

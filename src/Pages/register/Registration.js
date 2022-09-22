@@ -7,24 +7,20 @@ import Location from "./Location";
 import Mahr from "./Mahr";
 import Participants from "./Participants";
 import Power from "./Power";
-// import Gun from "gun";
 import Loader from "./Loader";
-// import mineBlocks from "../../hooks/useMine";
+import mineBlocks from "../../hooks/useMine";
 
 const Registration = () => {
   let { level } = useParams();
   const [loader, setLoader] = useState("");
   const [block, setBlock] = useState();
 
-  // const gun = Gun({
-  //   peers: ["http://localhost:5000/gun"],
-  // });
-  // const blockchain = gun.get("nikahnama");
-
   function handleAddBlock() {
-    // console.log("Block mined: " + mineBlocks(block, 3));
+    const url = "http://localhost:5000/addBlock";
+    // const url = "https://odd-stockings-newt.cyclic.app/addBlock";
+
     console.log(block);
-    fetch("http://localhost:5000/addBlock", {
+    fetch(url, {
       method: "POST",
       headers: new Headers({ "content-type": "application/json" }),
       body: JSON.stringify(block),
@@ -32,11 +28,9 @@ const Registration = () => {
       .then((response) => response.json())
       .then((data) => {
         // setLoader("অভিনন্দন! সফলভাবে বিবাহ নিবন্ধিত হয়েছে");
-        console.log(data);
+        // console.log(data);
+        console.log("Block mined: " + data);
       });
-    // gun.get("tutorial").on((data) => {
-    //   console.log("data changed: ", data);
-    // });
   }
 
   return (
@@ -65,11 +59,6 @@ const Registration = () => {
             </p>
             <hr className="my-5" />
 
-            {/* <form
-            autoComplete="off"
-            onSubmit={handleAddBlock}
-            className="text-xl"
-          > */}
             {level === "1" && (
               <div className="text-center">
                 <label className=" text-xl my-3">
@@ -83,6 +72,7 @@ const Registration = () => {
                 </div>
               </div>
             )}
+
             {level === "2" && <Participants type="groom" />}
             {level === "3" && <Participants type="bride" />}
             {level === "4" && <Mahr />}
@@ -90,7 +80,6 @@ const Registration = () => {
             {level === "6" && <Conditions />}
             {level === "7" && <Participants type="witness1" />}
             {level === "8" && <Participants type="witness2" />}
-            {level === "9" && <Participants type="kazi" />}
             {level === "9" && <Participants type="kazi" />}
             {level === "10" && <Final addBlock={setBlock} />}
 

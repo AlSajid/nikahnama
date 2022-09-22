@@ -30,10 +30,13 @@ const Location = ({ type, setLocation }) => {
           JsonQuery(`[*id=${upazila}][bn_name]`, { data: upazilas }).value[0]
         }, ${
           JsonQuery(`[*id=${district}][bn_name]`, { data: districts }).value[0]
-        }, ${
+        },
+        ${
           JsonQuery(`[*id=${division}][bn_name]`, { data: divisions }).value[0]
         } বিভাগ`
       );
+    } else {
+      localStorage.removeItem(`${type}-location`);
     }
   }, [
     district,
@@ -126,7 +129,7 @@ const Location = ({ type, setLocation }) => {
               localStorage.setItem(`${type}-district`, e.target.value);
             }}
           >
-            <option value="">জেলা</option>
+            <option>জেলা</option>
             {districts?.map((district) => (
               <option key={district.id} value={district.id}>
                 {district.bn_name}
@@ -145,7 +148,7 @@ const Location = ({ type, setLocation }) => {
               localStorage.setItem(`${type}-upazila`, e.target.value);
             }}
           >
-            <option value="">উপজেলা</option>
+            <option>উপজেলা</option>
             {upazilas?.map((upazila) => (
               <option key={upazila.id} value={upazila.id}>
                 {upazila.bn_name}
@@ -164,7 +167,7 @@ const Location = ({ type, setLocation }) => {
               localStorage.setItem(`${type}-union`, e.target.value);
             }}
           >
-            <option value="">ইউনিয়ন</option>
+            <option>ইউনিয়ন</option>
             {unions?.map((union) => (
               <option key={union.id} value={union.id}>
                 {union.bn_name}

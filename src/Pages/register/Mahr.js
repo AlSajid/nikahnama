@@ -60,7 +60,7 @@ const Mahr = () => {
         </div>
 
         <div className="w-full mx-3 py-3">
-          <label className="block">পরবর্তীতে পরিশোধযোগ্য মোহর</label>
+          <label className="block">বিলম্বিত মোহর</label>
           <input
             type="number"
             value={mahr - mustMahr}

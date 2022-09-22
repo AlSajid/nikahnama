@@ -25,7 +25,7 @@ const ShowPersonInfo = ({ type, data }) => {
     <table className="w-full p-5 border-2 my-3">
       <tbody>
         <tr className="border">
-          <td className="p-3 border w-1/4" rowSpan={4}>
+          <td className="p-3 border w-1/4" rowSpan={5}>
             {text} তথ্য
           </td>
           <td className="p-3 w-1/4">জাতীয় পরিচয় পত্রের নম্বর</td>
@@ -42,6 +42,10 @@ const ShowPersonInfo = ({ type, data }) => {
         <tr className="border">
           <td className="p-3">মাতার নাম</td>
           <td className="p-3">{data.name_of_mother}</td>
+        </tr>
+        <tr className="border">
+          <td className="p-3">ঠিকানা</td>
+          <td className="p-3">{data.location}</td>
         </tr>
       </tbody>
     </table>

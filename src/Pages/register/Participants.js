@@ -65,6 +65,12 @@ const Participants = ({ type }) => {
       .catch((err) => console.error("error:" + err));
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      getNIDinfo();
+    }
+  };
+
   let text;
   // eslint-disable-next-line default-case
   switch (type) {
@@ -111,6 +117,7 @@ const Participants = ({ type }) => {
             type="date"
             defaultValue={"2000-01-01"}
             value={birthDate}
+            onKeyDown={handleKeyDown}
             onChange={(e) => {
               setBirthDate(e.target.value);
               localStorage.setItem(`${type}-birthDate`, e.target.value);
