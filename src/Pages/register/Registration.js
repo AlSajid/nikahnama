@@ -7,29 +7,33 @@ import Location from "./Location";
 import Mahr from "./Mahr";
 import Participants from "./Participants";
 import Power from "./Power";
-import Loader from "./Loader";
 import mineBlocks from "../../hooks/useMine";
+import Confirmation from "../Confirmation";
+import Header from "./Header";
 
 const Registration = () => {
   let { level } = useParams();
-  const [loader, setLoader] = useState("");
-  const [block, setBlock] = useState();
 
-  function handleAddBlock() {
+  const [status, setStatus] = useState("");
+  const [data, setData] = useState({});
+  const [hash, setHash] = useState("");
+
+  async function handleAddBlock() {
+    setStatus("ব্লক তৈরি হচ্ছে...");
     const url = "http://localhost:5000/addBlock";
     // const url = "https://odd-stockings-newt.cyclic.app/addBlock";
 
-    console.log(block);
+    const minedBlock = await mineBlocks(data, setHash);
+    console.log(minedBlock);
+
     fetch(url, {
       method: "POST",
       headers: new Headers({ "content-type": "application/json" }),
-      body: JSON.stringify(block),
+      body: JSON.stringify(minedBlock),
     })
       .then((response) => response.json())
       .then((data) => {
-        // setLoader("অভিনন্দন! সফলভাবে বিবাহ নিবন্ধিত হয়েছে");
-        // console.log(data);
-        console.log("Block mined: " + data);
+        setStatus(data);
       });
   }
 
@@ -43,71 +47,62 @@ const Registration = () => {
             আবশ্যক। এজন্য মুঠোফোন থেকে নিবন্ধন কার্যক্রম পরিচালনা গ্রহণযোগ্য নয়।
           </p>
         </div>
-        {loader === "" ? (
-          <div className="border-dotted border-4 border-red-500 h-full py-5 px-5 relative hidden md:block">
-            <Link to="/">
-              <h1 className="text-3xl text-center sj my-3 text-red-600">
-                ডিজিটাল নিকাহ্‌নামা
-              </h1>
-            </Link>
 
-            <p className="my-3 text-xs text-right">
-              [বিধি ২৭ (১) (ক) দ্রষ্টব্য]
-              <br />
-              মুসলিম বিবাহ ও তালাক (নিবন্ধন) বিধিমালা, ২০০৯ এর বিধি ২৮ (১) (ক)
-              অনুযায়ী বিবাহ ফরম
-            </p>
-            <hr className="my-5" />
+        <div className="border-dotted border-4 border-red-500 h-full py-5 px-5 relative hidden md:block">
+          <Header />
 
-            {level === "1" && (
-              <div className="text-center">
-                <label className=" text-xl my-3">
-                  যেখানে বিবাহকার্য নিষ্পন্ন হয়েছে
-                </label>
-                <div className="my-10">
-                  <Location type="wed" />
-                </div>
-                <div className="my-10">
-                  <Info />
-                </div>
+          {level === "1" && (
+            <div className="text-center">
+              <label className=" text-xl my-3">
+                যেখানে বিবাহকার্য নিষ্পন্ন হয়েছে
+              </label>
+              <div className="my-10">
+                <Location type="wed" />
               </div>
-            )}
+              <div className="my-10">
+                <Info />
+              </div>
+            </div>
+          )}
 
-            {level === "2" && <Participants type="groom" />}
-            {level === "3" && <Participants type="bride" />}
-            {level === "4" && <Mahr />}
-            {level === "5" && <Power />}
-            {level === "6" && <Conditions />}
-            {level === "7" && <Participants type="witness1" />}
-            {level === "8" && <Participants type="witness2" />}
-            {level === "9" && <Participants type="kazi" />}
-            {level === "10" && <Final addBlock={setBlock} />}
+          {level === "2" && <Participants type="groom" />}
+          {level === "3" && <Participants type="bride" />}
+          {level === "4" && <Mahr />}
+          {level === "5" && <Power />}
+          {level === "6" && <Conditions />}
+          {level === "7" && <Participants type="witness1" />}
+          {level === "8" && <Participants type="witness2" />}
+          {level === "9" && <Participants type="kazi" />}
+          {level === "10" && <Final sendData={setData} />}
+          {level === "11" && <Confirmation hash={hash} status={status} />}
 
-            {level !== "1" && (
-              <Link to={"/register/" + (parseInt(level) - 1)}>
-                <button className="rounded absolute bottom-0 left-0 bg-slate-50 border-b-2 border-dashed border-slate-300 m-3 py-3 w-32">
-                  পূর্ববর্তী ধাপ
-                </button>
-              </Link>
-            )}
-            {level === "10" ? (
+          {/* bottom navigation buttons */}
+          {level !== "1" && level < 11 && (
+            <Link to={"/register/" + (parseInt(level) - 1)}>
+              <button className="rounded absolute bottom-0 left-0 bg-slate-50 border-b-2 border-dashed border-slate-300 m-3 py-3 w-32">
+                পূর্ববর্তী ধাপ
+              </button>
+            </Link>
+          )}
+          {level === "10" ? (
+            <Link to={"/register/" + (parseInt(level) + 1)}>
               <button
                 onClick={() => handleAddBlock()}
                 className="absolute bottom-0 right-0 border-2 rounded bg-slate-50 border-dashed m-3 py-3 w-32 "
               >
                 নিবন্ধন করুন
               </button>
-            ) : (
+            </Link>
+          ) : (
+            level !== "11" && (
               <Link to={"/register/" + (parseInt(level) + 1)}>
                 <button className="absolute bottom-0 right-0 border-b-2 bg-slate-50 rounded border-dashed border-slate-300 m-3 py-3 w-32 ">
                   পরবর্তী ধাপ
                 </button>
               </Link>
-            )}
-          </div>
-        ) : (
-          <Loader text={loader} />
-        )}
+            )
+          )}
+        </div>
       </div>
     </div>
   );

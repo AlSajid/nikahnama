@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^14.4.3",
     "create-react-app": "^1.2.1",
     "crypto-js": "^4.1.1",
+    "elliptic": "^6.5.4",
     "gun": "^0.2020.1238",
     "json-query": "^2.2.2",
     "number-to-bengli-words": "^1.0.2",

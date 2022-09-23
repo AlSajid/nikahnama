@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Power from "./Power";
 import ShowPersonInfo from "./ShowPersonInfo";
 
-const Final = ({ addBlock }) => {
+const Final = ({ sendData }) => {
   const [error, setError] = useState({});
 
   const wedLocation = localStorage.getItem("wed-location");
@@ -107,6 +107,9 @@ const Final = ({ addBlock }) => {
     //   }
     // }
   }, [wedLocation]);
+  useEffect(() => {
+    sendData(block);
+  }, []);
 
   return (
     <div className="h-5/6">

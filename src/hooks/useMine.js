@@ -1,25 +1,38 @@
 import sha256 from "crypto-js/sha256.js";
+import pkg from "elliptic";
+const { ec } = pkg;
 
-const mineBlocks = (block, difficulty) => {
-  const started = new Date().getTime();
+const mineBlocks = async (data, setHash) => {
+  const difficulty = 3;
+  const timestamp = new Date().getTime();
+
+  const block = { data };
+
   let nonce = 0;
-  let hash = sha256(block + nonce).toString();
+  let hash = sha256(JSON.stringify(block.data) + nonce + timestamp).toString();
 
-  const calculateHash = () => {
-    return sha256(JSON.stringify(block) + nonce).toString();
-  };
-  console.log("Hash: " + hash);
-  // while (hash.substring(0, difficulty) !== Array(difficulty + 1).join("1")) {
-  //   nonce++;
-  //   hash = calculateHash();
-    
-  // }
+  // calculating hash
+  while (
+    hash.substring(0, difficulty) !== Array(difficulty + 1).join("1") &&
+    hash.substring(hash.length - difficulty, hash.length) !==
+      Array(difficulty + 1).join("1")
+  ) {
+    nonce++;
+    hash = sha256(JSON.stringify(block.data) + nonce + timestamp).toString();
+    setHash(hash);
+    await new Promise((resolve) => setTimeout(resolve, 1)); // wait 1 ms
+  }
 
-  console.log(
-    "Mining Completed in " + (new Date().getTime() - started) + " milliseconds"
+  // signing the block
+
+  const myKey = ec("secp256k1").keyFromPrivate(
+    "0e9e7970f29c59ee1424fb74207af075c17511a41dd59009dc387e8b2d91d6d2"
   );
 
-  return nonce;
+  const sign = myKey.sign(hash, "base64");
+  const signature = sign.toDER("hex");
+
+  return { ...block, timestamp, nonce, hash, signature };
 };
 
 export default mineBlocks;
