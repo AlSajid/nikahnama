@@ -3,7 +3,7 @@ import pkg from "elliptic";
 const { ec } = pkg;
 
 const mineBlocks = async (data, setHash) => {
-  const difficulty = 3;
+  const difficulty = 2;
   const timestamp = new Date().getTime();
 
   const block = { data };

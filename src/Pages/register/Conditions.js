@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 const Conditions = () => {
   const [condition, setCondition] = useState([]);
@@ -6,7 +6,7 @@ const Conditions = () => {
     JSON.parse(localStorage.getItem("conditions"))
   );
 
-  const ref = useRef(null);
+  const ref = useRef();
   const addConditions = () => {
     if (condition.length > 0) {
       if (conditions === null) {
@@ -32,10 +32,7 @@ const Conditions = () => {
 
     setConditions(newConditions);
 
-    localStorage.setItem(
-      "conditions",
-      JSON.stringify(newConditions)
-    );
+    localStorage.setItem("conditions", JSON.stringify(newConditions));
   };
 
   const handleKeyDown = (event) => {
