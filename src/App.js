@@ -3,6 +3,7 @@ import Registration from "./Pages/register/Registration";
 import NikahNama from "./Pages/NikahNama";
 import Blockchain from "./Pages/NikahInfo/Blockchain";
 import Search from "./Pages/NikahInfo/Search";
+import LoopUp from "./Pages/NikahInfo/LoopUp";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/register/:level" element={<Registration />} />
         <Route path="/blockchain" element={<Blockchain />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/search/:nid" element={<LoopUp />} />
       </Routes>
     </div>
   );

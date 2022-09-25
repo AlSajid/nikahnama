@@ -4,25 +4,21 @@ import Header from "./Header";
 import Block from "./Block";
 
 const Blockchain = () => {
-  const gun = Gun({
-    peers: ["https://odd-stockings-newt.cyclic.app/gun"],
-  });
-
   const [blockchain, setBlockchain] = useState([]);
-  useEffect(() => {
-    gun.get("blockchain").on((data) => {
-      setBlockchain(JSON.parse(data?.nikahNama));
-    });
-  }, []);
-
   console.log(blockchain);
+
+  useEffect(() => {
+    fetch("https://odd-stockings-newt.cyclic.app/blockchain")
+      .then((res) => res.json())
+      .then((data) => setBlockchain(data.chain));
+  }, []);
 
   return (
     <div className="">
       <Header />
-      <div>
+      <div className="container mx-auto">
         {blockchain?.map((block) => (
-          <Block key={block.hash} data={block.data}/>
+          <Block key={block.hash} block={block} />
         ))}
       </div>
     </div>
