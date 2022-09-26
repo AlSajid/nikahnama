@@ -8,7 +8,9 @@ const Blockchain = () => {
   console.log(blockchain);
 
   useEffect(() => {
-    fetch("https://odd-stockings-newt.cyclic.app/blockchain")
+    const url = "https://odd-stockings-newt.cyclic.app/blockchain";
+    // const url = "http://localhost:5000/blockchain";
+    fetch(url)
       .then((res) => res.json())
       .then((data) => setBlockchain(data.chain));
   }, []);
