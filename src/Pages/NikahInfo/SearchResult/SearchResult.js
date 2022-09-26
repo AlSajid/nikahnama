@@ -108,21 +108,39 @@ const SearchResult = ({ data }) => {
                   <p>ঠিকানাঃ {data.data.bride.location}</p>
                 </div>
               </div>
-              <div className="mt-6">
-                <p className="text-center text-xl">
-                  উভয়ে বিবাহ বন্ধনে আবদ্ধ হয়েছেন
-                </p>
-                <p className="text-center text-lg sjn">
-                  তারিখঃ {data.data.dates.registered}
-                </p>
-                <p className="text-center text-lg">
-                  স্থানঃ {data.data.wedLocation}
-                </p>
+
+              <div className="  grid grid-cols-3 ">
+                <div className="">
+                  
+                </div>
+                <div className="col-span-2  flex justify-between">
+                  <div className=" mt-6 ">
+                    <p className="text-center text-xl">
+                      উভয়ে বিবাহ বন্ধনে আবদ্ধ হয়েছেন
+                    </p>
+                    <p className="text-center text-lg sjn">
+                      তারিখঃ {data.data.dates.registered}
+                    </p>
+                    <p className="text-center text-lg">
+                      স্থানঃ {data.data.wedLocation}
+                    </p>
+                  </div>
+
+                  <div className="h-48 w-48 overflow-hidden ">
+                    <img
+                      src="https://i.ibb.co/QXRRtsr/pngwing-com.png"
+                      alt="pngwing-com"
+
+                    />
+                  </div>
+                </div>
+
               </div>
+
             </div>
           </div>
         </div>
-        <div className="bg-img1">
+        {/* <div className="bg-img1">
           <img
             src="https://i.ibb.co/Y2DWzB1/pngwing-com.png"
             alt="pngwing-com"
@@ -135,14 +153,8 @@ const SearchResult = ({ data }) => {
             alt="pngwing-com"
             border="0"
           />
-        </div>
-        <div className="qr-code">
-          <img
-            src="https://i.ibb.co/QXRRtsr/pngwing-com.png"
-            alt="pngwing-com"
-            border="0"
-          />
-        </div>
+        </div> */}
+
       </div>
 
       <div className="mt-5 flex justify-center">
