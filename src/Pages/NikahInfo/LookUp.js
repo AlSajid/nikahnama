@@ -3,12 +3,12 @@ import { useParams } from "react-router-dom";
 import Header from "./Header";
 import SearchResult from "./SearchResult/SearchResult";
 
-const LoopUp = () => {
+const LookUp = () => {
   let { nid } = useParams();
   const [result, setResult] = useState([]);
 
   useEffect(() => {
-    const url = "http://localhost:5000/lookUp";
+    const url = "https://odd-stockings-newt.cyclic.app/lookUp";
     fetch(url, {
       method: "POST",
       headers: new Headers({ "content-type": "application/json" }),
@@ -32,4 +32,4 @@ const LoopUp = () => {
   );
 };
 
-export default LoopUp;
+export default LookUp;

@@ -1,0 +1,30 @@
+.certificate {
+  height: 7in;
+  width: 11.69in;
+}
+.bg-img1 {
+  height: 600px;
+  width: 600px;
+  position: absolute;
+  left: 15%;
+  top: 25%;
+  z-index: 1;
+  opacity: 0.2;
+}
+.bg-img2 {
+  width: 320px;
+  position: absolute;
+  right: 15%;
+  top: 20%;
+  z-index: 1;
+  opacity: 0.5;
+}
+
+.qr-code {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  right: 13%;
+  top: 81.5%;
+  z-index: 1;
+}
