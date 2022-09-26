@@ -123,7 +123,7 @@ const SearchResult = ({ data }) => {
                       তারিখঃ {data.data.dates.registered}
                     </p>
                     <p className="text-center text-lg">
-                      স্থানঃ নোয়াখালী, নোয়াখালী সদর, নোয়াখালী, চট্টগ্রাম বিভাগ
+                      স্থানঃ {data.data.wedLocation}
                     </p>
                   </div>
 
