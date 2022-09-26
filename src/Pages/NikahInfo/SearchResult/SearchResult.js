@@ -109,11 +109,12 @@ const SearchResult = ({ data }) => {
                 </div>
               </div>
 
-              <div className="  grid grid-cols-3 ">
+              <div className="  grid grid-cols-4 gap-4">
                 <div className="">
                   
                 </div>
-                <div className="col-span-2  flex justify-between">
+
+                <div className="col-span-3  pl-5 flex justify-between">
                   <div className=" mt-6 ">
                     <p className="text-center text-xl">
                       উভয়ে বিবাহ বন্ধনে আবদ্ধ হয়েছেন
@@ -122,7 +123,7 @@ const SearchResult = ({ data }) => {
                       তারিখঃ {data.data.dates.registered}
                     </p>
                     <p className="text-center text-lg">
-                      স্থানঃ {data.data.wedLocation}
+                      স্থানঃ নোয়াখালী, নোয়াখালী সদর, নোয়াখালী, চট্টগ্রাম বিভাগ
                     </p>
                   </div>
 
