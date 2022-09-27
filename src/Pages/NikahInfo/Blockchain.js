@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
-import Gun from "gun";
 import Header from "./Header";
 import Block from "./Block";
 
 const Blockchain = () => {
-  const [blockchain, setBlockchain] = useState([]);
-  console.log(blockchain);
+  const [blockchain, setBlockchain] = useState([]); 
 
   useEffect(() => {
     const url = "https://odd-stockings-newt.cyclic.app/blockchain";
     // const url = "http://localhost:5000/blockchain";
     fetch(url)
       .then((res) => res.json())
-      .then((data) => setBlockchain(data.chain));
+      .then((data) => setBlockchain(data));
   }, []);
 
   return (
