@@ -21,7 +21,7 @@ const Registration = () => {
   async function handleAddBlock() {
     setStatus("ব্লক তৈরি হচ্ছে...");
     // const url = "http://localhost:5000/addBlock";
-    const url = "https://odd-stockings-newt.cyclic.app/addBlock";
+    const url = "https://nikahnama.onrender.com/addBlock";
 
     const minedBlock = await mineBlocks(data, setHash);
     console.log(minedBlock);
