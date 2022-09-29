@@ -130,7 +130,7 @@ const SearchResult = ({ data }) => {
 
                   <div className="h-48 w-48 overflow-hidden ">
                     <img
-                      src="https://i.ibb.co/QXRRtsr/pngwing-com.png"
+                      src="https://i.ibb.co/ZYmWgPS/qrcode.png"
                       alt="pngwing-com"
 
                     />
