@@ -6,11 +6,13 @@ const Blockchain = () => {
   const [blockchain, setBlockchain] = useState([]); 
 
   useEffect(() => {
-    const url = "https://nikahnama.onrender.com/blockchain";
-    // const url = "http://localhost:5000/blockchain";
+    // const url = "https://nikahnama.onrender.com/blockchain";
+    const url = "http://localhost:5000/blockchain";
+
     fetch(url)
       .then((res) => res.json())
       .then((data) => setBlockchain(data));
+      
   }, []);
 
   return (
