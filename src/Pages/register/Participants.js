@@ -43,7 +43,7 @@ const Participants = ({ type }) => {
           setInformation(null);
         } else {
           setError(null);
-          setInformation(json);
+          setInformation(...json, { nid: nid, birthDate: birthDate });
         }
         console.log(json)
       })
