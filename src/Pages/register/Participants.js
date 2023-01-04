@@ -16,42 +16,35 @@ const Participants = ({ type }) => {
     localStorage.setItem(`${type}-information`, JSON.stringify(information));
   }, [information, type]);
 
-  const storeNIDinfo = (info) => {
-    fetch("https://eyafi.pythonanywhere.com/account/nidinfo/", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(info),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setInformation(data);
-        setLoader("");
-      })
-      .catch((err) => console.error("error:" + err));
-  };
+
 
   const nidLookUp = () => {
+
+    const body = JSON.stringify({ nid: nid, dob: birthDate });
+    console.log(body)
+
     setLoader("জাতীয় তথ্য ভান্ডারে খোঁজা হচ্ছে");
-    const url =
-      "https://national-id-verification-bangladesh.p.rapidapi.com/api/nid-check";
+    const url = "https://";
+
     const options = {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "5a60f7cc0bmsh62a09dd7c5606a5p1e2094jsn3544c0a96219",
-        "X-RapidAPI-Host": "national-id-verification-bangladesh.p.rapidapi.com",
       },
-      body: `{"nid":"${nid}","dob":"${birthDate}"}`,
+      body: body,
     };
+
     fetch(url, options)
-      .then((res) => res.json())
-      .then((json) => storeNIDinfo({ ...json, nid_number: nid }))
-      .catch((err) => console.error("error:" + err));
+      .then(response => response.json())
+      .then(json => console.log(json))
+      .catch((error) => console.error("error:" + error));
+
   };
 
   const getNIDinfo = () => {
+ 
     setLoader("আমাদের তথ্য ভান্ডারে খোঁজা হচ্ছে");
-    const url = `https://eyafi.pythonanywhere.com/account/nidinfo/?nid_number=${nid}&date_of_birth=${birthDate}`;
+    const url = `http://localhost:5000/nid`;
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
