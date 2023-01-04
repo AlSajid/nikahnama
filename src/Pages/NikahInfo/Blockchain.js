@@ -11,6 +11,7 @@ const Blockchain = () => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => setBlockchain(data));
+      
   }, []);
 
   return (

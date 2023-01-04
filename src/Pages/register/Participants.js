@@ -19,43 +19,44 @@ const Participants = ({ type }) => {
 
 
   const nidLookUp = () => {
+
+    const body = JSON.stringify({ nid: nid, dob: birthDate });
+    console.log(body)
+
     setLoader("জাতীয় তথ্য ভান্ডারে খোঁজা হচ্ছে");
-
-    const url = "http://localhost:5000/nid";
-
-    const data = {
-      nid: nid,
-      dob: birthDate,
-    };
+    const url = "https://";
 
     const options = {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: body,
     };
+
     fetch(url, options)
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-        if (json !== 'false') {
-          setError(null)
-          setInformation(json)
-        }
-        else{
-          setError('কোনও তথ্য পাওয়া যায়নি');
-        }
-        setLoader("");
-      })
-      .catch((error) => {
-        setLoader("");
-        setError(error);
-        console.error("error:" + error)
-      });
+      .then(response => response.json())
+      .then(json => console.log(json))
+      .catch((error) => console.error("error:" + error));
+
   };
 
-
+  const getNIDinfo = () => {
+ 
+    setLoader("আমাদের তথ্য ভান্ডারে খোঁজা হচ্ছে");
+    const url = `http://localhost:5000/nid`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.length === 0) {
+          nidLookUp();
+        } else {
+          setLoader("");
+          setInformation(data[0]);
+        }
+      })
+      .catch((err) => console.error("error:" + err));
+  };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {

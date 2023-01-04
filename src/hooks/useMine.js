@@ -13,13 +13,14 @@ const mineBlocks = async (data, setHash) => {
 
   // calculating hash
   while (
-    hash.substring(0, difficulty) !== Array(difficulty + 1).join("1") &&
+    hash.substring(0, difficulty) !== Array(difficulty + 1).join("1") ||
     hash.substring(hash.length - difficulty, hash.length) !==
       Array(difficulty + 1).join("1")
   ) {
     nonce++;
     hash = sha256(JSON.stringify(block.data) + nonce + timestamp).toString();
     setHash(hash);
+    console.log(hash);
     await new Promise((resolve) => setTimeout(resolve, 1)); // wait 1 ms
   }
 
