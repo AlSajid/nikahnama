@@ -4,13 +4,16 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import { BrowserRouter } from "react-router-dom";
+import UserContext from "./Context/UserContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <UserContext>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </UserContext>
   </React.StrictMode>
 );
 

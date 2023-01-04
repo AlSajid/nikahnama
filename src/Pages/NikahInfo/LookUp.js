@@ -8,7 +8,7 @@ const LookUp = () => {
   const [result, setResult] = useState([]);
 
   useEffect(() => {
-    const url = "https://odd-stockings-newt.cyclic.app/lookUp";
+    const url = "http://localhost:5000/lookUp";
     fetch(url, {
       method: "POST",
       headers: new Headers({ "content-type": "application/json" }),
@@ -16,6 +16,7 @@ const LookUp = () => {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setResult(data);
       });
   }, [nid]);

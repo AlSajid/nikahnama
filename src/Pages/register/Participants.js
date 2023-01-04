@@ -11,63 +11,56 @@ const Participants = ({ type }) => {
     JSON.parse(localStorage.getItem(`${type}-information`))
   );
   const [loader, setLoader] = useState("");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     localStorage.setItem(`${type}-information`, JSON.stringify(information));
   }, [information, type]);
 
-  const storeNIDinfo = (info) => {
-    fetch("https://eyafi.pythonanywhere.com/account/nidinfo/", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(info),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setInformation(data);
-        setLoader("");
-      })
-      .catch((err) => console.error("error:" + err));
-  };
 
   const nidLookUp = () => {
     setLoader("জাতীয় তথ্য ভান্ডারে খোঁজা হচ্ছে");
-    const url =
-      "https://national-id-verification-bangladesh.p.rapidapi.com/api/nid-check";
+
+    const url = "http://localhost:5000/nid";
+
+    const data = {
+      nid: nid,
+      dob: birthDate,
+    };
+
     const options = {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "5a60f7cc0bmsh62a09dd7c5606a5p1e2094jsn3544c0a96219",
-        "X-RapidAPI-Host": "national-id-verification-bangladesh.p.rapidapi.com",
       },
-      body: `{"nid":"${nid}","dob":"${birthDate}"}`,
+      body: JSON.stringify(data),
     };
     fetch(url, options)
       .then((res) => res.json())
-      .then((json) => storeNIDinfo({ ...json, nid_number: nid }))
-      .catch((err) => console.error("error:" + err));
+      .then((json) => {
+        console.log(json);
+        if (json !== 'false') {
+          setError(null)
+          setInformation(json)
+        }
+        else{
+          setError('কোনও তথ্য পাওয়া যায়নি');
+        }
+        setLoader("");
+      })
+      .catch((error) => {
+        setLoader("");
+        setError(error);
+        console.error("error:" + error)
+      });
   };
 
-  const getNIDinfo = () => {
-    setLoader("আমাদের তথ্য ভান্ডারে খোঁজা হচ্ছে");
-    const url = `https://eyafi.pythonanywhere.com/account/nidinfo/?nid_number=${nid}&date_of_birth=${birthDate}`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.length === 0) {
-          nidLookUp();
-        } else {
-          setLoader("");
-          setInformation(data[0]);
-        }
-      })
-      .catch((err) => console.error("error:" + err));
-  };
+
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      getNIDinfo();
+
+      nidLookUp();
     }
   };
 
@@ -127,10 +120,11 @@ const Participants = ({ type }) => {
         </div>
 
         <div className="w-full justify-center text-center flex items-center">
+          {error && <p className="text-red-500">{error}</p>}
           {loader === "" ? (
             <button
               className="border w-1/2 h-1/2 items-center rounded bg-slate-100 hover:bg-stone-300 "
-              onClick={() => getNIDinfo()}
+              onClick={() => nidLookUp()}
             >
               যাচাইকরণ
             </button>
