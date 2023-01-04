@@ -24,7 +24,7 @@ const Participants = ({ type }) => {
     console.log(body)
 
     setLoader("জাতীয় তথ্য ভান্ডারে খোঁজা হচ্ছে");
-    const url = "https://";
+    const url = "http://localhost:5000/nid";
 
     const options = {
       method: "POST",
@@ -36,27 +36,21 @@ const Participants = ({ type }) => {
 
     fetch(url, options)
       .then(response => response.json())
-      .then(json => console.log(json))
+      .then(json => {
+        setLoader("");
+        if (json === 'false') {
+          setError('কোনও তথ্য পাওয়া যায়নি');
+          setInformation(null);
+        } else {
+          setError(null);
+          setInformation(json);
+        }
+        console.log(json)
+      })
       .catch((error) => console.error("error:" + error));
 
   };
 
-  const getNIDinfo = () => {
- 
-    setLoader("আমাদের তথ্য ভান্ডারে খোঁজা হচ্ছে");
-    const url = `http://localhost:5000/nid`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.length === 0) {
-          nidLookUp();
-        } else {
-          setLoader("");
-          setInformation(data[0]);
-        }
-      })
-      .catch((err) => console.error("error:" + err));
-  };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
