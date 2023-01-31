@@ -43,7 +43,10 @@ const Participants = ({ type }) => {
           setInformation(null);
         } else {
           setError(null);
-          setInformation(...json, { nid: nid, birthDate: birthDate });
+          // setInformation({...json,  nid_number: nid, birthDate: birthDate });
+          json.nid_number = nid;
+          json.date_of_birth = birthDate;
+          setInformation(json);
         }
         console.log(json)
       })
@@ -51,6 +54,7 @@ const Participants = ({ type }) => {
 
   };
 
+  console.log(information);
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
