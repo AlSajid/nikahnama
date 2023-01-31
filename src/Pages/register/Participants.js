@@ -37,17 +37,21 @@ const Participants = ({ type }) => {
     fetch(url, options)
       .then(response => response.json())
       .then(json => {
+
         setLoader("");
         if (json === 'false') {
           setError('কোনও তথ্য পাওয়া যায়নি');
           setInformation(null);
         } else {
           setError(null);
-          setInformation(...json, { nid: nid, birthDate: birthDate });
+          setInformation({ ...json, nid: nid, birthDate: birthDate });
         }
         console.log(json)
+
       })
       .catch((error) => console.error("error:" + error));
+
+    console.log(information)
 
   };
 
