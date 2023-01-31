@@ -24,7 +24,7 @@ const Registration = () => {
     // const url = "https://nikahnama.onrender.com/addBlock";
 
     const minedBlock = await mineBlocks(data, setHash);
-    console.log(minedBlock);
+    // console.log(minedBlock);
 
     fetch(url, {
       method: "POST",

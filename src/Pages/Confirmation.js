@@ -11,11 +11,7 @@ const Confirmation = ({ status, hash }) => {
           <p className="text-slate-500 text-3xl my-5">ব্লক মাইন করা হচ্ছে...</p>
           <Loader text={hash} className="text-5xl"></Loader>
           {/* <p>হ্যাশঃ {hash}</p> */}
-          <QRCode
-            value={`https://nikahnama.vercel.app/search/${
-              JSON.parse(localStorage.getItem("groom-information")).nid_number
-            }`}
-          />
+
         </div>
       ) : (
         <div className="flex justify-center flex-col text-center my-10">
@@ -26,11 +22,7 @@ const Confirmation = ({ status, hash }) => {
             <Link to="/blockchain">
               <span className="underline"> ব্লকচেইন পাতায়</span>
             </Link>
-            <QRCode
-              value={`https://nikahnama.vercel.app/search/${
-                JSON.parse(localStorage.getItem("groom-information")).nid_number
-              }`}
-            />
+            
           </p>
         </div>
       )}

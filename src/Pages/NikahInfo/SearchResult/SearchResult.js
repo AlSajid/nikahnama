@@ -76,7 +76,7 @@ const SearchResult = ({ data }) => {
                   <p>
                     জন্মঃ{" "}
                     <span className="font-semibold sjn">
-                      {data.data.bride.date_of_birth}
+                      {data.data.groom.date_of_birth}
                     </span>
                   </p>
                   <p>ঠিকানাঃ {data.data.groom.location}</p>
